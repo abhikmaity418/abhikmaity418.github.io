@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Abhik Maity | Developer Portfolio</title>
+
+  <link rel="icon" type="image/png" href="tactara.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      scroll-behavior:smooth;
+    }
+
+    :root{
+      --bg:#050816;
+      --card:rgba(255,255,255,0.06);
+      --border:rgba(255,255,255,0.1);
+      --text:#ffffff;
+      --muted:#a9b4d0;
+      --primary:#7c5cff;
+      --secondary:#00d4ff;
+      --glow:rgba(124,92,255,0.5);
+    }
+
+    body{
+      font-family:'Inter',sans-serif;
+      background:
+      radial-gradient(circle at top left,#1a1f52 0%,#050816 40%),
+      radial-gradient(circle at bottom right,#003344 0%,#050816 35%);
+      color:var(--text);
+      overflow-x:hidden;
+      min-height:100vh;
+    }
+
+    .background-blur{
+      position:fixed;
+      width:450px;
+      height:450px;
+      border-radius:50%;
+      filter:blur(120px);
+      opacity:.45;
+      z-index:-1;
+    }
+
+    .blur1{
+      background:#7c5cff;
+      top:-100px;
+      left:-100px;
+    }
+
+    .blur2{
+      background:#00d4ff;
+      bottom:-100px;
+      right:-100px;
+    }
+
+    .container{
+      width:min(1200px,92%);
+      margin:auto;
+    }
+
+    nav{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:28px 0;
+    }
+
+    .logo-container{
+      display:flex;
+      align-items:center;
+      gap:14px;
+    }
+
+    .logo-img{
+      width:48px;
+      height:48px;
+      border-radius:14px;
+      box-shadow:0 8px 25px rgba(0,0,0,0.35);
+      transition:.3s ease;
+    }
+
+    .logo-img:hover{
+      transform:rotate(-5deg) scale(1.06);
+    }
+
+    .logo{
+      font-size:1.4rem;
+      font-weight:900;
+      letter-spacing:1px;
+    }
+
+    .logo span{
+      color:var(--secondary);
+    }
+
+    .nav-links{
+      display:flex;
+      gap:28px;
+    }
+
+    .nav-links a{
+      text-decoration:none;
+      color:var(--muted);
+      transition:.3s;
+      font-weight:600;
+    }
+
+    .nav-links a:hover{
+      color:white;
+    }
+
+    .hero{
+      min-height:88vh;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      text-align:center;
+    }
+
+    .tag{
+      background:rgba(255,255,255,0.08);
+      border:1px solid var(--border);
+      padding:12px 22px;
+      border-radius:999px;
+      color:var(--secondary);
+      backdrop-filter:blur(12px);
+      margin-bottom:30px;
+      animation:float 3s ease-in-out infinite;
+      font-weight:600;
+    }
+
+    .hero h1{
+      font-size:clamp(3.2rem,8vw,6.5rem);
+      line-height:1;
+      font-weight:900;
+      max-width:900px;
+      margin-bottom:28px;
+      letter-spacing:-4px;
+    }
+
+    .gradient{
+      background:linear-gradient(90deg,var(--secondary),var(--primary));
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
+
+    .hero p{
+      max-width:760px;
+      color:var(--muted);
+      font-size:1.15rem;
+      line-height:1.9;
+      opacity:.92;
+      margin-bottom:42px;
+    }
+
+    .buttons{
+      display:flex;
+      gap:18px;
+      flex-wrap:wrap;
+      justify-content:center;
+    }
+
+    .btn{
+      text-decoration:none;
+      padding:16px 32px;
+      border-radius:18px;
+      font-weight:700;
+      transition:.35s ease;
+      border:1px solid transparent;
+    }
+
+    .btn-primary{
+      background:linear-gradient(135deg,var(--primary),var(--secondary));
+      color:white;
+      box-shadow:0 10px 40px var(--glow);
+    }
+
+    .btn-primary:hover{
+      transform:translateY(-5px) scale(1.03);
+    }
+
+    .btn-secondary{
+      background:rgba(255,255,255,0.05);
+      border-color:var(--border);
+      color:white;
+      backdrop-filter:blur(10px);
+    }
+
+    .btn-secondary:hover{
+      transform:translateY(-5px);
+      background:rgba(255,255,255,0.08);
+    }
+
+    .projects{
+      padding:100px 0;
+    }
+
+    .section-title{
+      text-align:center;
+      font-size:2.8rem;
+      margin-bottom:65px;
+      font-weight:900;
+      letter-spacing:-1px;
+    }
+
+    .cards{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+      gap:30px;
+    }
+
+    .card{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:30px;
+      padding:34px;
+      position:relative;
+      overflow:hidden;
+      transition:.4s ease;
+      backdrop-filter:blur(16px);
+    }
+
+    .card::before{
+      content:'';
+      position:absolute;
+      inset:0;
+      background:
+      linear-gradient(
+        135deg,
+        rgba(124,92,255,0.18),
+        rgba(0,212,255,0.08)
+      );
+      opacity:0;
+      transition:.4s ease;
+    }
+
+    .card:hover::before{
+      opacity:1;
+    }
+
+    .card:hover{
+      transform:translateY(-10px);
+      border-color:rgba(255,255,255,0.18);
+      box-shadow:0 20px 50px rgba(0,0,0,0.35);
+    }
+
+    .card-content{
+      position:relative;
+      z-index:2;
+    }
+
+    .icon{
+      width:70px;
+      height:70px;
+      border-radius:22px;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      font-size:2rem;
+      margin-bottom:24px;
+      background:linear-gradient(135deg,var(--primary),var(--secondary));
+      box-shadow:0 10px 30px rgba(124,92,255,.35);
+      overflow:hidden;
+    }
+
+    .custom-icon{
+      padding:10px;
+    }
+
+    .custom-icon img{
+      width:100%;
+      height:100%;
+      object-fit:contain;
+      border-radius:14px;
+    }
+
+    .card h3{
+      font-size:1.7rem;
+      margin-bottom:14px;
+      font-weight:800;
+    }
+
+    .card p{
+      color:var(--muted);
+      line-height:1.8;
+      margin-bottom:26px;
+    }
+
+    .card a{
+      text-decoration:none;
+      color:white;
+      font-weight:700;
+      transition:.3s;
+    }
+
+    .card a:hover{
+      color:var(--secondary);
+    }
+
+    .footer{
+      text-align:center;
+      padding:70px 0 30px;
+      color:var(--muted);
+      border-top:1px solid rgba(255,255,255,0.08);
+      margin-top:80px;
+      font-size:.95rem;
+    }
+
+    @keyframes float{
+      0%,100%{
+        transform:translateY(0);
+      }
+
+      50%{
+        transform:translateY(-8px);
+      }
+    }
+
+    @media(max-width:768px){
+
+      .hero h1{
+        font-size:3.4rem;
+        letter-spacing:-2px;
+      }
+
+      .hero p{
+        font-size:1rem;
+      }
+
+      .nav-links{
+        display:none;
+      }
+
+      .cards{
+        grid-template-columns:1fr;
+      }
+
+      .logo{
+        font-size:1.1rem;
+      }
+
+      .logo-img{
+        width:42px;
+        height:42px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+  <div class="background-blur blur1"></div>
+  <div class="background-blur blur2"></div>
+
+  <div class="container">
+
+    <nav>
+
+      <div class="logo-container">
+
+        <img
+          src="tactara.png"
+          alt="Tactara Logo"
+          class="logo-img"
+        >
+
+        <div class="logo">
+          Abhik<span>.</span>
+        </div>
+
+      </div>
+
+      <div class="nav-links">
+
+        <a href="#projects">
+          Projects
+        </a>
+
+        <a href="https://github.com/abhikmaity418">
+          GitHub
+        </a>
+
+      </div>
+
+    </nav>
+
+    <section class="hero">
+
+      <div class="tag">
+        Developer | Creator | Builder
+      </div>
+
+      <h1>
+        Building
+        <span class="gradient">
+          beautiful
+        </span>
+        <br>
+        apps for the web.
+      </h1>
+
+      <p>
+        Hi, I'm Abhik Maity a passionate developer building modern web apps,
+        productivity tools, typing experiences, and creative digital projects
+        using HTML, CSS, and JavaScript.
+      </p>
+
+      <div class="buttons">
+
+        <a
+          class="btn btn-primary"
+          href="#projects"
+        >
+          View Projects
+        </a>
+
+        <a
+          class="btn btn-secondary"
+          href="https://github.com/abhikmaity418"
+        >
+          GitHub Profile
+        </a>
+
+      </div>
+
+    </section>
+
+    <section
+      class="projects"
+      id="projects"
+    >
+
+      <h2 class="section-title">
+        Featured Projects
+      </h2>
+
+      <div class="cards">
+
+        <div class="card">
+
+          <div class="card-content">
+
+            <div class="icon custom-icon">
+
+              <img
+                src="tactara.png"
+                alt="Tactara Logo"
+              >
+
+            </div>
+
+            <h3>
+              Tactara
+            </h3>
+
+            <p>
+              A modern touch typing practice platform with smooth UI,
+              accuracy tracking, speed analytics, and a clean
+              distraction-free typing experience.
+            </p>
+
+            <a href="https://abhikmaity418.github.io/tactara/">
+              Open Project ?
+            </a>
+
+          </div>
+
+        </div>
+
+        <div class="card">
+
+          <div class="card-content">
+
+            <div class="icon">
+              ?
+            </div>
+
+            <h3>
+              More Projects Coming
+            </h3>
+
+            <p>
+              I'm continuously building new apps, experiments,
+              creative tools, and modern web experiences.
+              More launches coming soon.
+            </p>
+
+            <a href="https://github.com/abhikmaity418">
+              Explore GitHub ?
+            </a>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <div class="footer">
+      © 2026 Abhik Maity • Designed & Built with HTML, CSS & JavaScript
+    </div>
+
+  </div>
+
+  <script>
+
+    const cards = document.querySelectorAll('.card');
+
+    cards.forEach(card => {
+
+      card.addEventListener('mousemove', e => {
+
+        const rect = card.getBoundingClientRect();
+
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        card.style.background = `
+        radial-gradient(
+          circle at ${x}px ${y}px,
+          rgba(255,255,255,0.12),
+          rgba(255,255,255,0.05)
+        )`;
+
+      });
+
+      card.addEventListener('mouseleave', () => {
+
+        card.style.background =
+        'rgba(255,255,255,0.06)';
+
+      });
+
+    });
+
+  </script>
+
+</body>
+
+</html>
